@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Page Title</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <link rel="stylesheet" href="./node_modules/element-ui/lib/theme-chalk/index.css">
+      <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+      <style>
+            [v-cloak]{
+                  display: none;
+            }
+      </style>
+</head>
+<body>
+      <div id="app" v-cloak>
+            <el-row>
+                  <el-col :span="12">
+                        <div class="canvas-container">
+                              <canvas id="a" width="600" height="600"></canvas>
+                        </div>
+                  </el-col>
+                  <el-col :span="12">
+                        <div class="top">
+                              <h2>
+                                    选择图案
+                              </h2>
+                              <ul class="img-list">
+                                    <li v-for="item in imgList" @click="selectImg(item)"><a href="javascript:;"><img :src="item"></a></li>
+                                   
+                                    <div class="clearfix"></div>
+                              </ul>
+                        </div>
+                        <div class="bottom">
+                              <h2>添加文字</h2>
+                              <div class="input-text">
+                                    <el-input placeholder="请输入内容" v-model="textarea"></el-input>
+                                    <el-select v-model="fontFamily" placeholder="文字字体" size="mini" @change="changeFontFamily">
+                                          <el-option-group v-for="group in fontFamilyArr" :key="group.label" :label="group.label">
+                                                <el-option v-for="item in group.options" :label="item.label" :value="item.label">
+                                                </el-option>
+                                          </el-option-group>
+                                    </el-select>
+                                    
+                                    <el-select placeholder="文字样式" size="mini" v-model="fontStyleV" @change="changeFontStyle" multiple collapse-tags>
+                                          <el-option v-for="item in fontStyle" :label="item" :value="item">
+                                          </el-option>
+                                    </el-select>
+                                    <el-tooltip class="item" effect="light" content="文字颜色" placement="bottom">
+                                          <el-color-picker v-model="color1" class="fa fa-certificate" @active-change="changeTextColor"></el-color-picker>
+                                    </el-tooltip>
+                                    <el-tooltip class="item" effect="light" content="文字背景颜色" placement="bottom">
+                                          <el-color-picker v-model="color2" class="fa fa-paste" @active-change="changeTextBgColor" show-alpha></el-color-picker>
+                                    </el-tooltip>
+                                    <el-button type="success" round size="mini" @click="addText">添加</el-button>
+                              </div>
+                              <div class="document-control">
+                                    <el-button type="primary" round size="mini" @click="saveImg">保存</el-button>
+                                    <el-button type="info" round size="mini"><a class="downLoad" download="downImg" @click="downLoadImg" :href="dataUrl">下载</a></el-button>
+                              </div>
+                              
+                              
+                              
+                              
+                              
+                        </div>
+                  </el-col>
+            </el-row>
+      </div>
+     
+      <script src="./node_modules/vue/dist/vue.min.js"></script>
+      <script src="./node_modules/element-ui/lib/index.js"></script>
+      <script src="./fabric.js"></script>
+      <script src="main.js"></script>
+</body>
+</html>
